@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRD Caspian Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --night:#0A2233;--night-2:#113750;--glow:#2FD3CF;--gold:#E2B75A;--gold-ink:#9A7426;
+  --bg:#F6F8F7;--surface:#FFFFFF;--tint:#E6F4F3;--sea:#15707F;--sea-ink:#0D4150;
+  --ink:#14212A;--muted:#5E6B75;--line:#E2E7E5;--on-night:#F1F5F4;--ok:#23A26B;--warn:#C0552B;
+  --f-d:"Unbounded","Segoe UI",system-ui,sans-serif;--f-b:"Manrope","Segoe UI",system-ui,sans-serif;
+  --r:18px;--shadow:0 1px 2px rgba(20,33,42,.05),0 10px 28px -14px rgba(20,33,42,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1A24;--surface:#12262F;--tint:#153A40;--ink:#E8EEEC;--muted:#98A6AE;--line:#22394A;--sea:#3FB7BF;--sea-ink:#8FE0E0;--gold-ink:#E2B75A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1A24;--surface:#12262F;--tint:#153A40;--ink:#E8EEEC;--muted:#98A6AE;--line:#22394A;--sea:#3FB7BF;--sea-ink:#8FE0E0;--gold-ink:#E2B75A;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-b)}
+h1,h2,h3{font-family:var(--f-d);font-weight:500;line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+a{color:inherit}
+.lt{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* top nav */
+.nav{position:sticky;top:0;z-index:10;background:var(--night);color:var(--on-night);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav .wrap{display:flex;gap:18px;align-items:center;padding-block:10px;overflow-x:auto;scrollbar-width:none}
+.nav b{font-family:var(--f-d);font-weight:600;white-space:nowrap;color:var(--gold)}
+.nav a{text-decoration:none;opacity:.75;font-size:.88rem;font-weight:600;white-space:nowrap}
+.nav a:hover{opacity:1;color:var(--glow)}
+
+/* hero */
+.hero{background:radial-gradient(60% 80% at 85% 30%,rgba(47,211,207,.25),transparent 70%),radial-gradient(40% 60% at 5% 100%,rgba(226,183,90,.16),transparent 70%),linear-gradient(180deg,var(--night),var(--night-2));color:var(--on-night)}
+.hero .wrap{padding-block:clamp(40px,7vw,80px);display:grid;gap:20px}
+.badge{display:inline-flex;gap:8px;flex-wrap:wrap}
+.badge span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:4px 12px;font-size:.8rem;font-weight:700}
+.badge .st{background:rgba(226,183,90,.18);border-color:rgba(226,183,90,.5);color:var(--gold)}
+.hero h1{font-size:clamp(2rem,5.5vw,3.8rem);font-weight:400}
+.hero h1 b{font-weight:600;background:linear-gradient(90deg,var(--glow),#9BE8C8 50%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:44rem;margin:0;opacity:.85;font-size:1.08rem}
+.style-note{border-left:3px solid var(--gold);padding-left:14px;font-size:.95rem!important;opacity:.75!important}
+
+section{padding-block:clamp(32px,5vw,56px)}
+.head{margin-bottom:24px;display:grid;gap:6px}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--sea);display:flex;gap:8px;align-items:center}
+.eyebrow::before{content:"";width:18px;height:2px;background:var(--gold);border-radius:2px}
+.head h2{font-size:clamp(1.5rem,3.2vw,2.2rem)}
+.head p{margin:0;color:var(--muted);max-width:42rem}
+.card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:20px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:860px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+
+/* goals */
+.goal{display:grid;gap:8px;align-content:start;color:#fff;border-radius:var(--r);padding:20px}
+.goal:nth-child(1){background:linear-gradient(135deg,#15707F,#1E9AA0)}
+.goal:nth-child(2){background:linear-gradient(135deg,#B57A22,#E2B75A)}
+.goal:nth-child(3){background:linear-gradient(135deg,#0F2C44,#1B4B6B)}
+.goal:nth-child(4){background:linear-gradient(135deg,#9C4A2A,#E07A4B)}
+.goal .n{font-family:var(--f-d);font-size:2rem;font-weight:600;opacity:.9;line-height:1}
+.goal b{font-size:1.02rem}
+
+/* audience */
+.aud{display:flex;gap:14px;align-items:flex-start}
+.aud i{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--tint);color:var(--sea-ink);font-style:normal;font-size:1.25rem}
+
+/* site map */
+.map{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:860px){.map{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.map{grid-template-columns:1fr}}
+.blk{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 14px 14px 48px;min-height:92px}
+.blk .num{position:absolute;left:12px;top:14px;width:26px;height:26px;border-radius:50%;background:var(--night);color:var(--gold);display:grid;place-items:center;font-size:.75rem;font-weight:800}
+.blk b{display:block;font-size:.95rem}
+.blk span{font-size:.82rem;color:var(--muted);line-height:1.45;display:block;margin-top:2px}
+.blk.dark{background:var(--night);border-color:var(--night);color:var(--on-night)}
+.blk.dark span{color:rgba(241,245,244,.7)}
+.blk.dark .num{background:var(--gold);color:var(--night)}
+.blk.lock{border-style:dashed;border-color:var(--gold)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:.82rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block}
+
+/* menu */
+#menuGrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){#menuGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){#menuGrid{grid-template-columns:1fr}}
+.cat h3{font-size:1rem;display:grid;gap:2px;margin-bottom:12px}
+.cat h3 small{font-family:var(--f-b);font-size:.78rem;color:var(--muted);font-weight:700}
+.cat ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.cat li{display:flex;align-items:center;gap:8px;font-size:.92rem}
+.cat li .name{flex:1;min-width:0}
+.bar{height:6px;border-radius:3px;background:var(--glow);opacity:.75;flex:none}
+.cat li .p{font-weight:700;min-width:62px;text-align:right}
+.hit{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:var(--night);border-radius:999px;padding:1px 7px;margin-left:6px}
+.cof{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sea);margin-left:6px;vertical-align:middle}
+
+/* features */
+.feat{display:grid;gap:10px;align-content:start}
+.feat h3{font-size:1rem;display:flex;gap:10px;align-items:center}
+.feat h3 .tagn{font-family:var(--f-b);font-size:.72rem;font-weight:800;background:var(--tint);color:var(--sea-ink);border-radius:8px;padding:2px 8px}
+.feat ul{margin:0;padding-left:18px;font-size:.92rem;color:var(--muted)}
+.feat li{margin:3px 0}
+.feat li b{color:var(--ink)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;align-items:stretch}
+.step{position:relative;padding:16px;border-radius:14px;background:var(--surface);box-shadow:var(--shadow);margin-right:22px;display:grid;gap:4px;align-content:start}
+.step:last-child{margin-right:0}
+.step:not(:last-child)::after{content:"→";position:absolute;right:-19px;top:50%;transform:translateY(-50%);color:var(--gold);font-weight:800}
+.step b{font-size:.92rem}
+.step span{font-size:.8rem;color:var(--muted);line-height:1.45}
+.step .who{font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sea)}
+@media (max-width:860px){.flow{grid-template-columns:1fr;gap:22px}.step{margin-right:0}.step:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-22px;transform:translateX(-50%)}}
+
+.statuses{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
+.s{font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:6px 12px}
+.s.new{background:#FFF4DC;color:#8A6420}
+.s.ready{background:#DDF5EA;color:#157A4E}
+.s.done{background:#E6F4F3;color:#0D4150}
+.arr{color:var(--muted);font-weight:800}
+
+/* stamps */
+.stamps{display:flex;gap:10px;margin:12px 0}
+.stamps i{width:38px;height:38px;border-radius:50%;border:1.5px dashed rgba(255,255,255,.4);display:grid;place-items:center;font-style:normal;font-size:.72rem;font-weight:800}
+.stamps i.on{background:var(--gold);border:0;color:var(--night)}
+.stamps i.gift{border-color:var(--gold);color:var(--gold)}
+.loyal{background:radial-gradient(80% 90% at 100% 0%,rgba(47,211,207,.3),transparent 60%),linear-gradient(145deg,var(--night),var(--night-2));color:var(--on-night);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.loyal p{margin:0;font-size:.9rem;opacity:.85}
+
+/* hours */
+.week{display:grid;grid-template-columns:44px 1fr;gap:6px 10px;align-items:center;font-size:.85rem}
+.track{position:relative;height:16px;border-radius:5px;background:var(--tint);overflow:hidden}
+.track i{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--sea),var(--glow));border-radius:5px}
+.ticks{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-left:54px;margin-top:4px}
+
+/* data */
+pre{margin:0;background:var(--night);color:#CFE7E6;border-radius:14px;padding:16px;font:13px/1.55 ui-monospace,Consolas,monospace;overflow-x:auto}
+pre .k{color:var(--glow)}pre .v{color:var(--gold)}
+.access{display:grid;gap:10px}
+.acc{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:var(--tint)}
+.acc b{display:block;font-size:.92rem}
+.acc span{font-size:.85rem;color:var(--muted)}
+.acc i{flex:none;font-style:normal;font-weight:800;color:var(--sea-ink)}
+
+/* design */
+.sw{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface)}
+.sw div{height:80px}
+.sw p{margin:0;padding:10px 12px;font-size:.85rem}
+.sw p b{display:block}
+.font-demo{display:grid;gap:4px}
+.font-demo .u{font-family:var(--f-d);font-size:1.6rem}
+.font-demo .m{font-family:var(--f-b);font-size:1.1rem}
+
+/* checklist */
+.check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.check li{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:.93rem}
+.check li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:5px;border:2px solid var(--gold)}
+.warn{border-left:4px solid var(--warn)}
+.warn ul{margin:6px 0 0;padding-left:18px;font-size:.92rem;color:var(--muted)}
+
+/* roadmap */
+.road{display:flex;flex-wrap:wrap;gap:10px}
+.road span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.9rem;font-weight:600}
+.road span::before{content:"＋ ";color:var(--sea);font-weight:800}
+
+footer{background:var(--night);color:var(--on-night);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:20px;opacity:.8}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap">
+  <b>Caspian Coffee · PRD</b>
+  <a href="#goals">Цели</a><a href="#map">Структура</a><a href="#menu">Меню</a><a href="#features">Функции</a><a href="#flow">Заказ</a><a href="#data">Данные</a><a href="#design">Дизайн</a><a href="#launch">Запуск</a>
+</div></header>
+
+<section class="hero" style="padding:0"><div class="wrap">
+  <div class="badge"><span>Версия 1.0</span><span>29.09.2026</span><span class="st">Прототип опубликован, ждёт реальных данных</span></div>
+  <h1>Сайт кофейни <b>Caspian Coffee</b></h1>
+  <p>Кофейня на набережной Актау, у спуска к пляжу. Сайт на казахском и русском: меню с фотографиями, предзаказы, карта лояльности гостя, афиша и галерея с видом на закат.</p>
+  <p class="style-note">Стиль «Ночной Каспий»: тёмно-синий первый экран с бирюзовым свечением и золотым орнаментом кошкар-мюйиз, ниже светлые современные разделы.</p>
+</div></section>
+
+<main>
+<section id="goals"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 2</span><h2>Цели</h2></div>
+  <div class="grid g4">
+    <div class="goal"><span class="n">1′</span><b>Предзаказ за 1 минуту</b><span class="small">Гость забирает заказ без очереди.</span></div>
+    <div class="goal"><span class="n">6→1</span><b>Гость возвращается</b><span class="small">Каждый 6-й кофе в подарок.</span></div>
+    <div class="goal"><span class="n">☀</span><b>Уникальность места</b><span class="small">Море, закат, национальная кухня.</span></div>
+    <div class="goal"><span class="n">☰</span><b>Все заказы в одном месте</b><span class="small">Бариста видит предзаказы и отмечает их статус.</span></div>
+  </div>
+</div></section>
+
+<section id="audience" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 3</span><h2>Аудитория</h2></div>
+  <div class="grid g4">
+    <div class="card aud"><i>🚶</i><div><b>Жители Актау</b><div class="muted small">Гуляют по набережной</div></div></div>
+    <div class="card aud"><i>🧳</i><div><b>Туристы</b><div class="muted small">Ищут кофе с видом на море</div></div></div>
+    <div class="card aud"><i>👨‍👩‍👧</i><div><b>Семьи</b><div class="muted small">Завтракают по выходным</div></div></div>
+    <div class="card aud"><i>☕</i><div><b>Сотрудники</b><div class="muted small">Бариста и владелец</div></div></div>
+  </div>
+</div></section>
+
+<section id="map" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 4</span><h2>Структура сайта</h2><p>12 блоков сверху вниз. Тёмные блоки выполнены в стиле «Ночной Каспий», пунктиром отмечен закрытый раздел.</p></div>
+  <div class="map">
+    <div class="blk dark"><span class="num">1</span><b>Шапка</b><span>Логотип, навигация, ҚАЗ/РУС, кнопка «Заказ» со счётчиком</span></div>
+    <div class="blk dark"><span class="num">2</span><b>Первый экран</b><span>«Қош келдіңіз!», CTA, эмблема, «Открыто», «Закат сегодня», волна</span></div>
+    <div class="blk"><span class="num">3</span><b>Преимущества</b><span>Обжариваем сами · Шубат и жент · Закат над морем</span></div>
+    <div class="blk"><span class="num">4</span><b>Меню</b><span>4 вкладки, карточки с фото, ценой и «+ в заказ»</span></div>
+    <div class="blk"><span class="num">5</span><b>Сертификаты</b><span>3 000, 5 000 и 10 000 ₸</span></div>
+    <div class="blk"><span class="num">6</span><b>Предзаказ</b><span>Форма и корзина</span></div>
+    <div class="blk"><span class="num">7</span><b>Карта гостя</b><span>Штампы и «Мои заказы» со статусами</span></div>
+    <div class="blk"><span class="num">8</span><b>Афиша</b><span>Три события</span></div>
+    <div class="blk"><span class="num">9</span><b>Галерея</b><span>Сетка фотографий</span></div>
+    <div class="blk lock"><span class="num">10</span><b>Доска бариста 🔒</b><span>Только владелец и редакторы</span></div>
+    <div class="blk"><span class="num">11</span><b>Контакты</b><span>Адрес и карты, часы, телефон, WhatsApp</span></div>
+    <div class="blk dark"><span class="num">12</span><b>Подвал</b><span>Копирайт, авторы фото</span></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--night)"></i>Тёмный блок</span><span><i style="background:var(--surface);border:1px solid var(--line)"></i>Светлый блок</span><span><i style="border:2px dashed var(--gold)"></i>Закрытый доступ</span></div>
+</div></section>
+
+<section id="menu" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 5.1</span><h2>Меню: 20 позиций в 4 категориях</h2><p>Длина полоски пропорциональна цене. <span class="hit" style="margin:0">хит</span> — метка на карточке. <span class="cof" style="margin:0"></span> — кофейный напиток, за него начисляется штамп.</p></div>
+  <div class="grid" id="menuGrid"></div>
+</div></section>
+
+<section id="features" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 5</span><h2>Функциональные требования</h2></div>
+  <div class="grid g3">
+    <div class="card feat">
+      <h3><span class="tagn">5.2</span>«Открыто сейчас»</h3>
+      <ul>
+        <li>Время по Актау <b>UTC+5</b>, где бы ни был гость</li>
+        <li>Открыто: «закроемся через X ч Y мин»</li>
+        <li>Закрыто: «откроемся в HH:MM» или «завтра в HH:MM»</li>
+        <li>Обновление каждые <b>30 с</b>, дубль в «Контактах»</li>
+      </ul>
+      <div class="week" style="margin-top:6px">
+        <span>Пн–Пт</span><div class="track"><i style="left:33.33%;width:62.5%"></i></div>
+        <span>Сб–Вс</span><div class="track"><i style="left:37.5%;width:62.5%"></i></div>
+      </div>
+      <div class="ticks"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+    </div>
+    <div class="card feat">
+      <h3><span class="tagn">5.3</span>Закат сегодня</h3>
+      <ul>
+        <li>Расчёт на странице по координатам <b>43°39′ N, 51°09′ E</b></li>
+        <li>Без внешних сервисов</li>
+        <li>До заката: «через X, займите место на террасе»</li>
+        <li>После заката показывается время завтрашнего</li>
+      </ul>
+    </div>
+    <div class="card feat">
+      <h3><span class="tagn">5.4</span>Предзаказ</h3>
+      <ul>
+        <li>Поля: имя, телефон, время получения, комментарий</li>
+        <li>Слоты по <b>15 мин</b>: от «сейчас + 20 мин» до закрытия, при нехватке добавляются слоты на завтра</li>
+        <li>Проверки: корзина не пуста, есть имя, в телефоне ≥ 10 цифр</li>
+        <li>Количество 1–20, итоговая сумма</li>
+        <li>Оплата при получении: наличные или Kaspi QR</li>
+      </ul>
+    </div>
+    <div class="loyal feat">
+      <h3 style="color:#fff"><span class="tagn">5.5</span>Карта гостя</h3>
+      <div class="stamps" aria-label="Пример: 4 штампа из 6"><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i class="on">✓</i><i>5</i><i class="gift">🎁</i></div>
+      <p>«До подарка осталось: 2». Штамп начисляется за кофейный напиток из выданного заказа: 6 позиций «Кофе», шубат-латте, раф «Курт-карамель», бал-кофе, талқан-латте. «Мои заказы» показывает последние 6 заказов в реальном времени.</p>
+    </div>
+    <div class="card feat">
+      <h3><span class="tagn">5.6</span>Доска бариста</h3>
+      <ul>
+        <li>Только владелец и редакторы</li>
+        <li>Заказы от новых к старым: номер, имя, телефон, время, состав, сумма, комментарий</li>
+        <li>Кнопки «Готов» и «Выдан», повторное нажатие возвращает «Принят»</li>
+        <li>Счётчик «Новых: N · всего: M»</li>
+      </ul>
+    </div>
+    <div class="card feat">
+      <h3><span class="tagn">5.7–5.9</span>Прочее</h3>
+      <ul>
+        <li><b>Сертификаты</b> на 3 000, 5 000 и 10 000 ₸ действуют 6 месяцев и добавляются в корзину</li>
+        <li><b>Язык</b> ҚАЗ / РУС переключает весь интерфейс, выбор запоминается, по умолчанию русский</li>
+        <li><b>Карты</b>: 2ГИС и Яндекс открываются в новой вкладке</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="flow" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Путь заказа</span><h2>От меню до подарочного кофе</h2></div>
+  <div class="flow">
+    <div class="step"><span class="who">Гость</span><b>Выбирает в меню</b><span>«+ в заказ» меняется на «В заказе · N»</span></div>
+    <div class="step"><span class="who">Гость</span><b>Отправляет форму</b><span>Имя, телефон, слот времени</span></div>
+    <div class="step"><span class="who">Сайт</span><b>Сохраняет заказ</b><span>В документ <code>orders/&lt;id&gt;</code>, показывает номер и сумму</span></div>
+    <div class="step"><span class="who">Бариста</span><b>Меняет статус</b><span>На доске: «Готов», затем «Выдан»</span></div>
+    <div class="step"><span class="who">Гость</span><b>Получает штампы</b><span>За каждый кофе в выданном заказе</span></div>
+  </div>
+  <div class="statuses"><span class="muted small">Статусы:</span><span class="s new">Принят</span><span class="arr">→</span><span class="s ready">Готов, забирайте</span><span class="arr">→</span><span class="s done">Выдан</span></div>
+</div></section>
+
+<section id="data" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 6</span><h2>Данные и доступ</h2><p>У каждого гостя свой документ в базе данных страницы, в нём хранятся последние 40 заказов.</p></div>
+  <div class="grid g2">
+<pre><span class="k">orders/&lt;id гостя&gt;</span>
+{
+  <span class="k">"name"</span>: <span class="v">"Айгерим"</span>,
+  <span class="k">"phone"</span>: <span class="v">"+7 701 234 56 78"</span>,
+  <span class="k">"orders"</span>: [{
+    <span class="k">"number"</span>: <span class="v">"482"</span>,
+    <span class="k">"items"</span>: [{ <span class="k">"id"</span>: <span class="v">"capp"</span>, <span class="k">"qty"</span>: <span class="v">2</span>, <span class="k">"price"</span>: <span class="v">1400</span> }],
+    <span class="k">"total"</span>: <span class="v">2800</span>,
+    <span class="k">"pickupLabel"</span>: <span class="v">"Сегодня, 12:30"</span>,
+    <span class="k">"status"</span>: <span class="v">"new | ready | done"</span>,
+    <span class="k">"lang"</span>: <span class="v">"ru"</span>
+  }]
+}</pre>
+    <div class="access">
+      <div class="acc"><i>👤</i><div><b>Гость</b><span>Читает и пишет только свой документ</span></div></div>
+      <div class="acc"><i>🔑</i><div><b>Владелец и редакторы</b><span>Читают и меняют все документы</span></div></div>
+      <div class="acc"><i>✓</i><div><b>Проверено</b><span>При доступе уровня гостя чужие заказы не видны</span></div></div>
+      <div class="card small" style="box-shadow:none;border:1px solid var(--line)"><b>Раздел 8. Надёжность</b><br><span class="muted">Внешние картинки и скрипты не загружаются. Без базы данных работает демо-режим. При ошибке отправки показывается понятное сообщение, корзина сохраняется, после сбоя связи делается одна повторная попытка.</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="design" style="padding-top:0"><div class="wrap">
+  <div class="head"><span class="eyebrow">Раздел 7</span><h2>Дизайн</h2></div>
+  <div class="grid g4">
+    <div class="sw"><div style="background:#0A2233"></div><p><b>Ночной синий</b><span class="muted">#0A2233</span></p></div>
+    <div class="sw"><div style="background:#2FD3CF"></div><p><b>Бирюза</b><span class="muted">#2FD3CF</span></p></div>
+    <div class="sw"><div style="background:#E2B75A"></div><p><b>Золото</b><span class="muted">#E2B75A</span></p></div>
+    <div class="sw"><div style="background:#F6F8F7;border-bottom:1px solid #E2E7E5"></div><p><b>Светлый фон</b><span class="muted">#F6F8F7</span></p></div>
+  </div>
+  <div class="grid g3" style="margin-top:14px">
+    <div class="card font-demo"><span class="muted small">Шрифты</span><span class="u">Unbounded</span><span class="m">Manrope для основного текста</span></div>
+    <div class="card"><span class="muted small">Анимации</span><p style="margin:4px 0 0">Вращение эмблемы, движение волны и появление первого экрана. Отключаются при системной настройке «уменьшение движения».</p></div>
+    <div class="card"><span class="muted small">Адаптивность и фото</span><p style="margin:4px 0 0">Ширина от 390 px, на телефоне одна колонка. 20 снимков с Unsplash, авторы указаны в подвале.</p></div>
+  </div>
+</div></section>
+
+<section id="launch" style="padding-top:0"><div class="wrap">
+  <div class="grid g2">
+    <div>
+      <div class="head"><span class="eyebrow">Раздел 9</span><h2>Заменить перед запуском</h2></div>
+      <ul class="check">
+        <li>Реальный адрес, телефон, WhatsApp, Instagram и часы работы</li>
+        <li>События в афише (сейчас примеры)</li>
+        <li>Фото галереи: терраса, море, гости</li>
+        <li>Собственные фото жента, чак-чака и шубат-латте</li>
+        <li>Проверка казахского перевода носителем языка</li>
+        <li>Реальные цены и состав меню</li>
+        <li>Доступ гостей: «Поделиться» с уровнем не ниже Contributor</li>
+      </ul>
+    </div>
+    <div>
+      <div class="head"><span class="eyebrow">Раздел 10</span><h2>Ограничения</h2></div>
+      <div class="card warn">
+        <ul>
+          <li>Заказы и штампы сохраняются только у посетителей, которые вошли в claude.ai и имеют доступ к странице. По публичной ссылке заказ не сохраняется.</li>
+          <li>Карта лояльности привязана к аккаунту, а не к номеру телефона.</li>
+          <li>Для открытого сайта нужен свой сервер или интеграция: WhatsApp, Telegram-бот или CRM.</li>
+        </ul>
+      </div>
+      <div class="head" style="margin-top:28px"><span class="eyebrow">Раздел 11</span><h2>Следующие версии</h2></div>
+      <div class="road"><span>Заказ бариста в WhatsApp / Telegram</span><span>Онлайн-оплата Kaspi</span><span>Бронь столика на закат</span><span>Отзывы гостей</span><span>Комбо дня и завтраки</span></div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Caspian Coffee · Ақтау</span><span>Визуализация PRD v1.0</span></div></footer>
+
+<script>
+const MENU=[
+ ["Кофе",[["Эспрессо",900,0,1],["Американо",1000,0,1],["Капучино",1400,0,1],["Латте",1500,0,1],["Флэт уайт",1600,0,1],["Раф ванильный",1800,0,1]]],
+ ["Национальное",[["Шубат-латте",2100,1,1],["Раф «Курт-карамель»",2000,0,1],["Бал-кофе",1800,0,1],["Талқан-латте",1900,0,1],["Жент",1200,0,0],["Баурсаки с мёдом",900,1,0]]],
+ ["Чай",[["Қара шай с молоком",1200,0,0],["Чай с чабрецом",1300,0,0],["Облепиховый чай",1600,0,0],["Матча-латте",1800,0,0]]],
+ ["Выпечка",[["Круассан",950,0,0],["Круассан миндальный",1300,0,0],["Чак-чак",1100,0,0],["Чизкейк с облепихой",1700,0,0]]]
+];
+const fmt=n=>n.toLocaleString("ru-RU").replace(/\s/g," ")+" ₸";
+const grid=document.getElementById("menuGrid");
+MENU.forEach(([cat,items])=>{
+  const el=document.createElement("div");el.className="card cat";
+  const min=Math.min(...items.map(i=>i[1])),max=Math.max(...items.map(i=>i[1]));
+  el.innerHTML=`<h3>${cat}<small>${items.length} поз. · ${fmt(min)}–${fmt(max)}</small></h3><ul></ul>`;
+  const ul=el.querySelector("ul");
+  items.forEach(([n,p,hit,cof])=>{
+    const li=document.createElement("li");
+    li.innerHTML=`<span class="name"></span><span class="bar" style="width:${Math.round(p/2100*44)}px"></span><span class="p lt">${fmt(p)}</span>`;
+    const s=li.querySelector(".name");s.textContent=n;
+    if(cof)s.insertAdjacentHTML("beforeend",'<span class="cof" title="Кофейный напиток: штамп"></span>');
+    if(hit)s.insertAdjacentHTML("beforeend",'<span class="hit">хит</span>');
+    ul.appendChild(li);
+  });
+  grid.appendChild(el);
+});
+</script>
+</body>
+</html>
